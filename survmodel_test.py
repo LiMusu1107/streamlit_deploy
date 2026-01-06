@@ -4,7 +4,8 @@ import numpy as np
 from lifelines import CoxPHFitter
 import matplotlib.pyplot as plt
 from io import BytesIO
-import base64
+import warnings
+warnings.filterwarnings('ignore')
 
 # 设置页面配置
 st.set_page_config(
@@ -231,7 +232,7 @@ if calculate or 'autocalc' in st.session_state:
                 mime="image/png",
             )
     
-    # 显示模型信息
+    # 显示模型信息 - 修复这里的错误
     with st.expander("📊 Model Information", expanded=False):
         col1, col2 = st.columns(2)
         
@@ -240,13 +241,15 @@ if calculate or 'autocalc' in st.session_state:
             st.write(f"- Number of patients in training: {len(data_for_cox)}")
             st.write(f"- Features used: Age, Grade, Risk Group")
             st.write(f"- Model: Cox Proportional Hazards")
+            st.write(f"- Concordance Index: {cph.concordance_index_:.3f}")
         
         with col2:
             st.write("**Cox Model Coefficients**")
+            # 修复：使用 params_ 而不是 params
             coef_df = pd.DataFrame({
-                'Feature': cph.params.index,
-                'Coefficient': cph.params.values,
-                'Hazard Ratio': np.exp(cph.params.values)
+                'Feature': cph.params_.index,
+                'Coefficient': cph.params_.values,
+                'Hazard Ratio': np.exp(cph.params_.values)
             })
             st.dataframe(coef_df, use_container_width=True, hide_index=True)
     
@@ -260,6 +263,8 @@ if calculate or 'autocalc' in st.session_state:
     3. **95% CI**: 95% confidence interval for the survival estimate
     4. **Grade**: G2 (low grade) vs G3 (high grade) tumors
     5. **Risk Group**: Based on molecular markers (High=1, Low=0)
+    
+    **Note**: The model is trained on TCGA-LGG data. Predictions are estimates and should be used in conjunction with clinical judgment.
     """)
 else:
     # 初始状态显示说明
@@ -283,5 +288,4 @@ else:
     """)
     
     # 显示示例图片占位符
-    st.image("https://via.placeholder.com/800x400/25558F/FFFFFF?text=Survival+Curve+Will+Appear+Here", 
-             caption="Survival curve will appear here after calculation")
+    st.info("👈 Adjust the parameters in the sidebar and click 'Calculate Survival Prediction' to see the results.")
