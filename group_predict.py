@@ -57,9 +57,9 @@ st.sidebar.markdown("---")
 st.sidebar.header("📁 Example Data")
 st.sidebar.markdown("""
 Download example data files for testing:
-- [mRNA Example](https://github.com/LiMusu1107/streamlit_deploy/raw/main/data/tcga_mrna.csv)
-- [miRNA Example](https://github.com/LiMusu1107/streamlit_deploy/raw/main/data/tcga_mirna.csv)
-- [Methylation Example](https://github.com/LiMusu1107/streamlit_deploy/raw/main/data/tcga_meth.csv)
+- [mRNA Example](https://github.com/LiMusu1107/streamlit_deploy/raw/main/data/example_mrna.csv)
+- [miRNA Example](https://github.com/LiMusu1107/streamlit_deploy/raw/main/data/example_mirna.csv)
+- [Methylation Example](https://github.com/LiMusu1107/streamlit_deploy/raw/main/data/example_meth.csv)
 """)
 
 # 模型文件夹映射
@@ -518,3 +518,4 @@ def main():
 if __name__ == "__main__":
 
     main()
+
