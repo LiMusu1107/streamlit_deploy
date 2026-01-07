@@ -1,10 +1,22 @@
+# 指定下载源以获取 CPU 版本（防止 Streamlit Cloud 内存溢出）
 --index-url https://download.pytorch.org/whl/cpu
-torch==2.2.0
-torchvision==0.17.0
+--extra-index-url https://pypi.org/simple
+
+# 基础框架
 streamlit==1.29.0
+
+# 数据处理 (这些版本在 3.11 下非常稳定)
 pandas==2.2.1
 numpy==1.26.4
+
+# 机器学习与统计
 scikit-learn==1.5.1
 lifelines==0.30.0
+
+# 绘图
 matplotlib==3.8.3
 seaborn==0.13.2
+
+# 深度学习 (Python 3.11 完美支持 2.1.0)
+torch==2.1.0
+torchvision==0.16.0
