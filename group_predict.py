@@ -338,38 +338,38 @@ def main():
         if omic_type == "multiomics":
             # 加载多组学训练数据
             try:
-                omics1 = pd.read_csv("data/tcga_mrna_50.csv").to_numpy()  # 假设有50维的训练数据
-                omics2 = pd.read_csv("data/tcga_mirna_50.csv").to_numpy()
-                omics3 = pd.read_csv("data/tcga_meth_50.csv").to_numpy()
+                omics1 = pd.read_csv("data/tcga_mrna.csv").to_numpy()  # 假设有50维的训练数据
+                omics2 = pd.read_csv("data/tcga_mirna.csv").to_numpy()
+                omics3 = pd.read_csv("data/tcga_meth.csv").to_numpy()
                 omics = np.concatenate((omics1, omics2, omics3), axis=1)
                 train_X = omics[train_idx]
             except FileNotFoundError:
                 st.error("Training data files not found. Please ensure the 50-feature training data files are available.")
-                st.info("Required files: tcga_mrna_50.csv, tcga_mirna_50.csv, tcga_meth_50.csv")
+                st.info("Required files: tcga_mrna.csv, tcga_mirna.csv, tcga_meth.csv")
                 return
                 
         elif omic_type == "mRNA":
             try:
-                omics1 = pd.read_csv("data/tcga_mrna_50.csv").to_numpy()
+                omics1 = pd.read_csv("data/tcga_mrna.csv").to_numpy()
                 train_X = omics1[train_idx]
             except FileNotFoundError:
-                st.error("mRNA training data file not found: tcga_mrna_50.csv")
+                st.error("mRNA training data file not found: tcga_mrna.csv")
                 return
                 
         elif omic_type == "miRNA":
             try:
-                omics2 = pd.read_csv("data/tcga_mirna_50.csv").to_numpy()
+                omics2 = pd.read_csv("data/tcga_mirna.csv").to_numpy()
                 train_X = omics2[train_idx]
             except FileNotFoundError:
-                st.error("miRNA training data file not found: tcga_mirna_50.csv")
+                st.error("miRNA training data file not found: tcga_mirna.csv")
                 return
                 
         elif omic_type == "methylation":
             try:
-                omics3 = pd.read_csv("data/tcga_meth_50.csv").to_numpy()
+                omics3 = pd.read_csv("data/tcga_meth.csv").to_numpy()
                 train_X = omics3[train_idx]
             except FileNotFoundError:
-                st.error("Methylation training data file not found: tcga_meth_50.csv")
+                st.error("Methylation training data file not found: tcga_meth.csv")
                 return
         
         train_y = label[train_idx]
@@ -516,4 +516,5 @@ def main():
         """)
 
 if __name__ == "__main__":
+
     main()
