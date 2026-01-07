@@ -384,7 +384,8 @@ def main():
         data_trte_list = [torch.FloatTensor(np.concatenate((train_X, test_X), axis=0))]
         
         # 检查CUDA可用性
-        cuda = torch.cuda.is_available()
+        # cuda = torch.cuda.is_available()
+        cuda = False
         if cuda:
             data_tr_list[0] = data_tr_list[0].cuda()
             data_trte_list[0] = data_trte_list[0].cuda()
@@ -518,5 +519,6 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
 
