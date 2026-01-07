@@ -1,13 +1,22 @@
-# Streamlit Cloud 稳定版本组合
+# 基础框架
 streamlit==1.29.0
+
+# 数据处理 (Python 3.12 要求 numpy >= 1.26.0)
 pandas==2.2.1
 numpy==1.26.4
-scikit-learn==1.4.1
+
+# 机器学习与统计
+scikit-learn==1.5.1
 lifelines==0.30.0
+
+# 绘图
 matplotlib==3.8.3
 seaborn==0.13.2
-torch==2.1.0
-torchvision==0.16.0
+
+# 深度学习 (注意：torch 2.1.0 不支持 3.12，必须升到 2.2.0+)
+torch==2.2.0
+torchvision==0.17.0
+
 
 
 
