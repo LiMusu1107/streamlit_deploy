@@ -18,6 +18,7 @@ matplotlib==3.8.3
 seaborn==0.13.2
 
 # 深度学习 (Python 3.11 完美支持 2.1.0)
-torch==2.1.0+cpu
-torchvision==0.16.0+cpu
+torch==2.1.0 --index-url https://download.pytorch.org/whl/cpu
+# torchvision==0.16.0
+
 
