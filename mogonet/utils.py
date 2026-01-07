@@ -142,3 +142,28 @@ def load_model_dict(folder, model_dict):
         if cuda:
             model_dict[module].cuda()    
     return model_dict
+
+def load_model_dict_cpu(folder, model_dict, device='cpu'):
+    """
+    加载模型权重到指定设备
+    
+    Args:
+        folder: 模型文件夹路径
+        model_dict: 模型字典
+        device: 设备，'cpu' 或 'cuda'
+    """
+    for module in model_dict:
+        model_path = os.path.join(folder, module + ".pth")
+        if os.path.exists(model_path):
+            try:
+                # 加载模型权重到CPU
+                state_dict = torch.load(model_path, map_location=device)
+                model_dict[module].load_state_dict(state_dict)
+                # 将模型移到指定设备
+                model_dict[module] = model_dict[module].to(device)
+#                print(f"Module '{module}' loaded successfully to {device}!")
+            except Exception as e:
+                print(f"ERROR: Failed to load module '{module}': {e}")
+        else:
+            print(f"WARNING: Module '{module}' from model_dict is not loaded! File not found: {model_path}")
+    return model_dict
