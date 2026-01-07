@@ -17,7 +17,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'mogonet
 try:
     from mogonet.models_FNN import init_model_dict
     from mogonet.train_test_FNN import test_epoch
-    from mogonet.utils import load_model_dict, one_hot_tensor, cal_sample_weight
+    from mogonet.utils import load_model_dict_cpu, one_hot_tensor, cal_sample_weight
 except ImportError:
     st.error("Error: Could not import mogonet modules. Please ensure the mogonet folder is in the correct location.")
     st.stop()
@@ -113,7 +113,7 @@ def init_and_load_model(model_folder, dim_list):
         )
         
         # 加载训练好的模型
-        return load_model_dict(model_folder, model)
+        return load_model_dict_cpu(model_folder, model)
     except Exception as e:
         st.error(f"Error initializing or loading model: {str(e)}")
         return None
@@ -518,4 +518,5 @@ def main():
 if __name__ == "__main__":
 
     main()
+
 
